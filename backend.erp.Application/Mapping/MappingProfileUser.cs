@@ -22,6 +22,13 @@ namespace backend.erp.Application.Mapping
                 .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.Nome))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
                 .ForMember(dest => dest.Situacao, opt => opt.MapFrom(src => src.Situacao));
+
+            CreateMap<RequestUserDTO, Usuarios>().ReverseMap()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.Nome))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+                .ForMember(dest => dest.Situacao, opt => opt.MapFrom(src => src.Situacao))
+                .ForMember(dest => dest.Senha, opt => opt.MapFrom(src => src.Senha));
         }
 
     } 

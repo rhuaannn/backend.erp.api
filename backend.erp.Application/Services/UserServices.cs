@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using backend.erp.Application.Interfaces;
 using backend.erp.Application.UsuarioDTO;
+using backend.erp.Domain.Model;
 using backend.erp.Infra.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +21,18 @@ namespace backend.erp.Application.Services
         {
             var users = await _appDbContext.users.ToListAsync();
             return _mapper.Map<List<ResponseUserDTO>>(users);
+        }
+
+        public async Task<RequestUserDTO>CreateUserAsync (RequestUserDTO requestUserDTO)
+        {
+            var addUser = _mapper.Map<Usuarios>(requestUserDTO);
+            var user = await _appDbContext.users.AddAsync(addUser); 
+            if (user == null)
+            {
+                throw new Exception("Error creating user");
+            }
+            await _appDbContext.SaveChangesAsync();
+            return _mapper.Map<RequestUserDTO>(addUser);
         }
     }
 }

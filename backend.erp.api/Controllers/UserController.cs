@@ -1,4 +1,5 @@
 ﻿using backend.erp.Application.Interfaces;
+using backend.erp.Application.UsuarioDTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +27,13 @@ namespace backend.erp.api.Controllers
                 return NotFound("No users found.");
             }
             return Ok(users);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddUserAsync([FromBody] RequestUserDTO requestUserDto)
+        {
+            var user = await _usersService.CreateUserAsync(requestUserDto);
+            return Ok(user);
         }
     }
 }
