@@ -1,4 +1,5 @@
-﻿using backend.erp.Domain.ValueObject;
+﻿using backend.erp.Domain.UserEnums;
+using backend.erp.Domain.ValueObject;
 
 namespace backend.erp.Domain.Model
 {
@@ -10,7 +11,7 @@ namespace backend.erp.Domain.Model
 
                 public Documento Documento { get; set; }
                 
-                public bool Situacao { get; set; }
+                public SituationEnum Situacao { get; set; }
 
                 public ICollection<Produtos> Produtos { get; set; } = new List<Produtos>();
 
