@@ -1,5 +1,4 @@
-﻿using BrazilModels;
-
+﻿using backend.erp.Domain.UserEnums;
 namespace backend.erp.Domain.Model
 {
     public class Usuarios
@@ -14,6 +13,6 @@ namespace backend.erp.Domain.Model
 
                 public DateTime DataCadastro { get; set; }
 
-                public bool Situacao { get; set; }
+                public SituationEnum Situacao { get; set; }
     }
 }

@@ -1,8 +1,9 @@
+using backend.erp.Domain.UserEnums;
+
 namespace backend.erp.Application.UsuarioDTO;
 
 public class RequestUserDTO
 {
-    public Guid Id { get; set; }
 
     public string Nome { get; set; }
 
@@ -12,11 +13,11 @@ public class RequestUserDTO
 
     public DateTime DataCadastro { get; set; } = DateTime.UtcNow;
 
-    public bool Situacao { get; set; }
+    public SituationEnum Situacao { get; set; }
 
     public RequestUserDTO()
     {
-        
+ 
     }
 
 }

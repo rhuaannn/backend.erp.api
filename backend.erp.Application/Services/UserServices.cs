@@ -4,6 +4,7 @@ using backend.erp.Application.UsuarioDTO;
 using backend.erp.Domain.Model;
 using backend.erp.Infra.Context;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Crypto.Generators;
 
 namespace backend.erp.Application.Services
 {
@@ -23,16 +24,16 @@ namespace backend.erp.Application.Services
             return _mapper.Map<List<ResponseUserDTO>>(users);
         }
 
-        public async Task<RequestUserDTO>CreateUserAsync (RequestUserDTO requestUserDTO)
+        public async Task<ResponseUserDTO> CreateUserAsync(RequestUserDTO requestUserDTO)
         {
             var addUser = _mapper.Map<Usuarios>(requestUserDTO);
-            var user = await _appDbContext.users.AddAsync(addUser); 
-            if (user == null)
-            {
-                throw new Exception("Error creating user");
-            }
+            addUser.Senha = BCrypt.Net.BCrypt.HashPassword(addUser.Senha);
+
+            await _appDbContext.users.AddAsync(addUser);
             await _appDbContext.SaveChangesAsync();
-            return _mapper.Map<RequestUserDTO>(addUser);
+
+            return _mapper.Map<ResponseUserDTO>(addUser);
         }
+
     }
 }
