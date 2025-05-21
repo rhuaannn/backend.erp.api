@@ -5,6 +5,6 @@ namespace backend.erp.Application.Interfaces;
 
 public interface IFornecedor
 {
-    public Task<List<ResponseFornecedorDTO>> GetAllFornecedoresAsync();
+    public Task<List<ResponseFornecedorDTO>> GetAllSuppliersAsync();
     
 }

@@ -20,7 +20,7 @@ namespace backend.erp.api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllSuppliers()
         {
-            var suppliers = await _fornecedorService.GetAllFornecedoresAsync();
+            var suppliers = await _fornecedorService.GetAllSuppliersAsync();
             if (suppliers == null || !suppliers.Any())
             {
                 return NotFound("No suppliers found.");

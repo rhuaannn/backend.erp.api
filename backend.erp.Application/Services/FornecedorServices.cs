@@ -6,18 +6,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace backend.erp.Application.Services
 {
-    public class Fornecedor  : IFornecedor
+    public class FornecedorServices  : IFornecedor
     {
         
         private readonly AppDbContext _appDbContext; 
         private readonly IMapper _mapper;
 
-        public Fornecedor(AppDbContext appDbContext, IMapper mapper)
+        public FornecedorServices(AppDbContext appDbContext, IMapper mapper)
         {
             _appDbContext = appDbContext;
             _mapper = mapper;
         }
-        public async Task<List<ResponseFornecedorDTO>> GetAllFornecedoresAsync()
+        public async Task<List<ResponseFornecedorDTO>> GetAllSuppliersAsync()
         {
             var fornecedores = await _appDbContext.suppliers.ToListAsync();
             return _mapper.Map<List<ResponseFornecedorDTO>>(fornecedores); 

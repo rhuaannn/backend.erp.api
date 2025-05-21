@@ -1,6 +1,7 @@
 using backend.erp.Application.Interfaces;
 using backend.erp.Application.Mapping;
 using backend.erp.Application.Services;
+using backend.erp.Domain.Model;
 using backend.erp.Infra.Context;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(MappingProfileUser));
 builder.Services.AddScoped<IUsers, UserServices>();
+builder.Services.AddScoped<IFornecedor, FornecedorServices>();
 var app = builder.Build();
 
 
