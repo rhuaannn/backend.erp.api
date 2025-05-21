@@ -30,10 +30,11 @@ namespace backend.erp.api.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> AddUserAsync([FromBody] RequestUserDTO requestUserDto)
         {
             var user = await _usersService.CreateUserAsync(requestUserDto);
-            return Ok(user);
+            return Created("post", user);
         }
     }
 }
