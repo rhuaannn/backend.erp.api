@@ -1,6 +1,8 @@
-﻿using backend.erp.Application.Interfaces;
+﻿using backend.erp.Application.FornecedorDTO;
+using backend.erp.Application.Interfaces;
 
 using Microsoft.AspNetCore.Mvc;
+using System.Collections;
 
 namespace backend.erp.api.Controllers
 {
@@ -27,6 +29,16 @@ namespace backend.erp.api.Controllers
             }
 
             return Ok(suppliers);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddSuppliers([FromBody] RequestFornecedorDTO requestFornecedorDTO)
+        {
+            if (requestFornecedorDTO == null)
+            {
+                return BadRequest("Invalid supplier data.");
+            }
+            var createdSupplier = await _fornecedorService.AddSuppliersAsync(requestFornecedorDTO);
+            return CreatedAtAction(nameof(GetAllSuppliers), new { id = createdSupplier.Id }, createdSupplier);
         }
     }
 }

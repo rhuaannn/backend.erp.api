@@ -12,10 +12,11 @@ namespace backend.erp.Domain.ValueObject
 
                 public Documento(string documento)
         {
-            if (isValid())
+            if (CpfCnpj.ValidateString(documento) == null)
             {
-                Documentos = documento;
+                throw new Exception("Documento inválido.");
             }
+                Documentos = documento;
         }
 
                 public bool isValid()

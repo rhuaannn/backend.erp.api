@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
-using backend.erp.Application.UsuarioDTO;
 using backend.erp.Application.FornecedorDTO;
+using backend.erp.Application.UsuarioDTO;
 using backend.erp.Domain.Model;
 using backend.erp.Domain.UserEnums;
+using backend.erp.Domain.ValueObject;
 
 namespace backend.erp.Application.Mapping
 {
@@ -41,6 +42,15 @@ namespace backend.erp.Application.Mapping
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.Nome))
                 .ForMember(dest => dest.Situacao, opt => opt.MapFrom(src => src.Situacao == SituationEnum.Active));
+            CreateMap<RequestFornecedorDTO, Fornecedores>()
+                .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.Nome))
+                .ForMember(dest => dest.Documento, opt => opt.MapFrom(src => new Documento(src.Documento)))
+                .ForMember(dest => dest.Situacao, opt => opt.MapFrom(src => SituationEnum.Active));
+
+            CreateMap<Fornecedores, RequestFornecedorDTO>()
+                .ForMember(dest => dest.Documento, opt => opt.MapFrom(src => src.Documento.ToString()));
+
+
         }
     }
 }
