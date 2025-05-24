@@ -21,7 +21,17 @@ namespace backend.erp.Application.Services
 
         public async Task<RequestFornecedorDTO> AddSuppliersAsync(RequestFornecedorDTO requestFornecedorDTO)
         {
+            if (string.IsNullOrEmpty(requestFornecedorDTO.Documento))
+            {
+                throw new Exception("Documento obrigatório.");
+            }
             var suppliers = _mapper.Map<Fornecedores>(requestFornecedorDTO);
+            var supplersxists = await _appDbContext.suppliers.AnyAsync(f => f.Documento == suppliers.Documento);
+               
+            if (supplersxists)
+            {
+                throw new Exception("Supplier already exists with the same document.");
+            }
             await _appDbContext.suppliers.AddAsync(suppliers);
             await _appDbContext.SaveChangesAsync();
             return _mapper.Map<RequestFornecedorDTO>(suppliers);
